@@ -12,6 +12,7 @@ import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import com.mycompany.myapp.entities.Blog;
+import com.mycompany.myapp.entities.BlogReview;
 import com.mycompany.myapp.entities.Reclamation;
 import com.mycompany.myapp.utils.Statics;
 import java.util.ArrayList;
@@ -183,6 +184,27 @@ public class ServiceBlog {
     NetworkManager.getInstance().addToQueueAndWait(req);//execution ta3 request sinon yet3ada chy dima nal9awha
     return resultOK;
         
+    }
+    
+    public boolean addBlogReview(BlogReview p) {
+        System.out.println(p);
+        System.out.println("********");
+        String url = Statics.BASE_URL +"blog/addReview/"+p.getBlogId()+"?comment=" + p.getComment()+"&rate=" + p.getRate() ;
+        System.out.println(url);
+        //String url = Statics.BASE_URL + "create";
+
+        req.setUrl(url);
+        req.setPost(false);
+
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
     }
     
 }

@@ -51,7 +51,9 @@ public class ListReclamation extends Form {
             
             c2.add(delete);
             c2.add(update);
+            if(p.getStatus().equals("Pending")){
             c2.add(response);
+            }
             c.addAll(mb,c2);
             add(c);
 

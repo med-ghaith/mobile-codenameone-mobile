@@ -19,8 +19,11 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.Reclamation;
 import com.mycompany.myapp.services.ServiceReclamation;
+import com.mycompany.myapp.utils.Mailing;
+
 import com.sun.mail.smtp.SMTPTransport;
 import java.util.Date;
+
 
 
 
@@ -53,7 +56,7 @@ public class ResponseReclamation extends Form {
                     Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
                 } else {
                     try {
-                       // Mailing.send("mohamedghaith.talbi@esprit.tn",tfObject.getText() ,tfDesc.getText(), "", "");
+                        Mailing.send("mohamedghaith.talbi@esprit.tn",tfObject.getText() ,tfDesc.getText(), "", "");
                        Message m = new Message(tfDesc.getText());
                    // m.getAttachments().put(textAttachmentUri, "text/plain");
                      //Display.getInstance().sendMessage(new String[] {"mohamedghaith.talbi@esprit.tn"}, tfDesc.getText(), m);
@@ -67,6 +70,8 @@ public class ResponseReclamation extends Form {
                         }
                     } catch (NumberFormatException e) {
                         Dialog.show("ERROR", "Status must be a number", new Command("OK"));
+                    } catch (Exception ex) {
+                        
                     }
 
                 }
